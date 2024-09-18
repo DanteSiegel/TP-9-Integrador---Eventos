@@ -1,16 +1,20 @@
-
 "use client";
-import styles from './page.module.css'
-import Link from 'next/link';
-export default function Home() {
+
+import React from 'react';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+const MainPage = () => {
     return (
-        <div className={styles.container}>
-            <h1>Bienvenido</h1>
-            <p>Elija una opción:</p>
-            <div className={styles.buttons}>
-            <Link href="/login">Login</Link>
-            <Link href="/register">Register</Link>
-            </div>
+        <div>
+            <Navbar />
+            <main>
+                <h1>Bienvenido a nuestra página de eventos</h1>
+                <p>Selecciona una opción en el menú para empezar.</p>
+            </main>
+            <Footer />
         </div>
     );
-}
+};
+
+export default MainPage;
