@@ -1,14 +1,11 @@
-"use client";
-import React from 'react';
-
-const Contact = () => {
+// pages/contact.js
+export default function Contact() {
     return (
-        <div className="contact">
-            <h2>Contacto</h2>
-            <p>Email: lospapus@gmail.com</p>
-            <p>Teléfono: Cañete</p>
-        </div>
+      <div className="contact-page">
+        <h1>Contacto</h1>
+        <p>Email: contacto@eventos.com</p>
+        <p>Teléfono: +1 234 567 890</p>
+      </div>
     );
-};
-
-export default Contact;
+  }
+  
