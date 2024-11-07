@@ -1,14 +1,13 @@
 // pages/register.js
+"use client";
 
-"use client;"
 import Link from 'next/link';
-import { useUser } from '.././Context/UserContext'; // Importa el contexto
-
-
-
+import { useUser } from '../Context/UserContext';
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
-  const { setUser } = useUser(); // Obtén la función para establecer el usuario
+  const { setUser } = useUser();
+  const router = useRouter();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -16,8 +15,11 @@ export default function Register() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // Lógica de registro aquí (por ejemplo, llamar a una API)
-    setUser({ name, email }); // Establece el usuario en el contexto
+    // Guardar usuario en Local Storage
+    const userData = { name, email, password };
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData); // Guardar usuario en contexto
+    router.push('/'); // Redirigir a la página de eventos
   };
 
   return (

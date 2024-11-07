@@ -2,18 +2,27 @@
 "use client";
 
 import Link from 'next/link';
-import { useUser } from '.././Context/UserContext'; // Importa el contexto
+import { useUser } from '../Context/UserContext';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
-  const { setUser } = useUser(); // Obtén la función para establecer el usuario
+  const { setUser } = useUser();
+  const router = useRouter();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
-    const name = "Nombre Del Usuario"; // Esto debería ser el nombre del usuario
+    const password = e.target.password.value;
 
-    // Lógica de autenticación aquí (por ejemplo, llamar a una API)
-    setUser({ name, email }); // Establece el usuario en el contexto
+    // Obtener usuario registrado desde Local Storage
+    const registeredUser = JSON.parse(localStorage.getItem('user'));
+
+    if (registeredUser && registeredUser.email === email && registeredUser.password === password) {
+      setUser(registeredUser); // Guardar usuario en contexto
+      router.push('/'); // Redirigir a la página de eventos
+    } else {
+      alert("Usuario no registrado o credenciales incorrectas. Por favor, regístrate.");
+    }
   };
 
   return (

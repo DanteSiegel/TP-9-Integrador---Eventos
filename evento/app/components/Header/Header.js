@@ -1,35 +1,43 @@
 // components/Header.js
-"use client"; // Asegúrate de tener esto al principio
+"use client";
+
 import Link from 'next/link';
-import { useUser } from '../../Context/UserContext'; // Asegúrate de que esta ruta sea correcta
+import { useUser } from '../../Context/UserContext';
+import { useRouter } from 'next/navigation';
+
 const Header = () => {
-    const { user, setUser } = useUser(); // Obtén el estado del usuario y la función para actualizarlo
-  
-    const handleLogout = () => {
-      setUser(null); // Restablece el usuario en el contexto
-    };
-  
-    return (
-      <header className="header">
-        <div className="logo">
-          <Link href="/">Eventos</Link>
-        </div>
-        <nav>
-          <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/contact">Contacto</Link></li>
-            {user ? (
-              <li className="user-info">
-                <span>{user.name}</span>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
-            ) : (
-              <li><Link href="/login">Login</Link></li>
-            )}
-          </ul>
-        </nav>
-      </header>
-    );
+  const { user, setUser } = useUser();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    setUser(null);
+    router.push('/'); // Redirigir al home al cerrar sesión
   };
-  
-  export default Header;
+
+  return (
+    <header className="header">
+      <div className="logo">
+        <Link href="/">Eventos</Link>
+      </div>
+      <nav>
+        <ul>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/contact">Contacto</Link></li>
+          {user ? (
+            <li className="user-info">
+              <span>{user.name}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </li>
+          ) : (
+            <>
+              <li><Link href="/login">Login</Link></li>
+              <li><Link href="/register">Registrarse</Link></li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
