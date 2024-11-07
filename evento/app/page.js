@@ -1,5 +1,7 @@
+// pages/index.js (Página principal o Home)
 "use client";
-import styles from './page.module.css'; 
+import Link from 'next/link';
+import styles from './page.module.css';
 
 export default function Home() {
 
@@ -12,7 +14,7 @@ export default function Home() {
     },
     {
       id: 2,
-      name: 'Feria de Tecnologíaa',
+      name: 'Feria de Tecnología',
       description: 'Explora las últimas innovaciones tecnológicas.',
       date: '2024-12-01',
     },
@@ -28,14 +30,15 @@ export default function Home() {
     <div>
       <h1>Eventos Disponibles</h1>
       <ul>
-        {/* Mapeo de la lista de eventos para mostrarlos */}
         {events.map(event => (
           <li key={event.id} className={styles.eventItem}>
-            <h2 className={styles.eventTitle}>{event.name}</h2>
-            <p className={styles.eventDescription}>{event.description}</p>
-            <p className={styles.eventDate}>
-              <strong>Fecha:</strong> {new Date(event.date).toLocaleDateString()}
-            </p>
+            <Link href={`/events/${event.id}`}>
+              <h2 className={styles.eventTitle}>{event.name}</h2>
+              <p className={styles.eventDescription}>{event.description}</p>
+              <p className={styles.eventDate}>
+                <strong>Fecha:</strong> {new Date(event.date).toLocaleDateString()}
+              </p>
+            </Link>
           </li>
         ))}
       </ul>
