@@ -1,22 +1,23 @@
-'use client'; // Esto asegura que el componente funcione en el cliente
-
+// src/pages/Login.js
+'use client'
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // IMPORTANTE: Usa el nuevo hook para rutas en la carpeta `app`
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom'; // Usamos useNavigate
+import styles from '../styles/form.module.css'
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const router = useRouter(); // Hook de navegación
+  const navigate = useNavigate(); // Inicializa el enrutador
 
   useEffect(() => {
+    // Verifica si ya hay un token en localStorage
     const token = localStorage.getItem('token');
     if (token) {
-      router.push('/home'); // Redirige si ya está autenticado
+      navigate('/Home'); // Redirige a la lista de eventos si ya está logueado
     }
-  }, [router]);
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,25 +28,26 @@ const Login = () => {
         username,
         password,
       });
-
+      
       if (response.data.success) {
+        // Guardar token y nombre de usuario en localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('username', username);
-        router.push('/home'); // Redirige después del login
+        navigate('/Home'); // Redirige a la lista de eventos
       } else {
         setError(response.data.message);
       }
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      setError('Ocurrió un error al intentar iniciar sesión.');
+      console.error("Error al iniciar sesión:", error);
+      setError("Ocurrió un error al intentar iniciar sesión.");
     }
   };
 
   return (
-    <div >
-      <form onSubmit={handleLogin} >
+    <div className={styles.formContainer}>
+      <form onSubmit={handleLogin} className={styles.form}>
         <label>Nombre de Usuario:</label>
-        <div >
+        <div className={styles.formGroup}>
           <input
             type="text"
             value={username}
@@ -54,7 +56,7 @@ const Login = () => {
           />
         </div>
         <label>Contraseña:</label>
-        <div >
+        <div className={styles.formGroup}>
           <input
             type="password"
             value={password}
@@ -63,7 +65,7 @@ const Login = () => {
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" >Iniciar Sesión</button>
+        <button type="submit" className={styles.submitButton}>Iniciar Sesión</button>
       </form>
     </div>
   );

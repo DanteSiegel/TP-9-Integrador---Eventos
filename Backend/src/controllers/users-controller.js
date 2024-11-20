@@ -6,7 +6,7 @@ import AuthMiddleware from "../auth/AuthMiddleware.js";
 const router = express.Router();
 const usuarioServicios = new UsuarioServicios();
 
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
         const usuario = await usuarioServicios.login(username, password);
@@ -70,5 +70,20 @@ router.get("/", AuthMiddleware, async (req, res) => {
         });
     }
 });
+
+router.patch("/isAdmin", AuthMiddleware, async (req, res)=>{
+    try{
+        const userId = req.user.id;
+        await usuarioServicios.darAdmin(userId)
+        return res.status(200).json({message: "El usuario ahora es admin"})
+    }
+ catch (error) {
+    console.error("Error al obtener la información del usuario:", error.message);
+    return res.status(500).json({
+        success: false,
+        message: error.message
+    });
+}
+})
 
 export default router;
