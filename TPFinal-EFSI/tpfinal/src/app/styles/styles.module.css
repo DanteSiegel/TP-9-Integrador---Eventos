@@ -1,0 +1,20 @@
+/* Header.module.css */
+.body {
+  background-color: rgb(0, 132, 255); /* bg-gray-800 */
+  color: white; /* text-white */
+  padding: 1rem; /* p-4 */
+  display: flex; /* flex */
+  justify-content: space-between; /* justify-between */
+  align-items: center; /* items-center */
+}
+
+.navLinks {
+  display: flex; /* flex */
+  gap: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
