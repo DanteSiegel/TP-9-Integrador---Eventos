@@ -1,0 +1,70 @@
+/* Contacto.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .subtitle {
+    font-size: 24px;
+    color: #0070f3;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .contactInfo ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .contactInfo li {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .formContainer {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .submitButton {
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+  
+  .submitButton:hover {
+    background-color: #005bb5;
+  }
+  
